@@ -14,7 +14,9 @@ public class Send {
              Channel channel = connection.createChannel()) {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             String message = "I'm waiting for you...";
-            channel.basicPublish("", QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
+            for (int i = 0; i < 10000; i++) {
+                channel.basicPublish("", QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
+            }
             System.out.println(" [x] Sent '" + message + "'");
         }
     }
